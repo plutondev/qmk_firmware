@@ -24,6 +24,7 @@
 #define _SL 2
 
 #define MOD_CTRL MT(MOD_LCTL, KC_CAPS)
+#define MOD_LGUI MT(MOD_LALT, KC_LGUI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BL] = LAYOUT_tkl_iso(
@@ -32,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,               KC_DEL,  KC_END,  KC_PGDN, \
         MOD_CTRL,KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,                                  \
         KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT,               KC_UP,            \
-        KC_LCTL, _______, KC_RGUI,                            KC_SPC,                             _______, KC_RALT, _______, KC_RCTL,      KC_LEFT, KC_DOWN, KC_RGHT  \
+        KC_RCTL, _______, MOD_LGUI,                           KC_SPC,                             _______, RALT(0), _______, KC_RCTL,      KC_LEFT, KC_DOWN, KC_RGHT  \
     ),
     [_FL] = LAYOUT_tkl_iso(
         _______,          _______, _______, _______, _______, _______, _______, _______, _______, KC_MSTP, KC_MPLY, KC_MPRV, KC_MNXT,      _______, _______, _______, \
@@ -48,8 +49,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,               KC_DEL,  KC_END,  KC_PGDN, \
         MOD_CTRL,KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,                                  \
         KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT,               KC_UP,            \
-        KC_LALT, _______, KC_LGUI,                            KC_SPC,                             _______, KC_RALT, _______, KC_RCTL,      KC_LEFT, KC_DOWN, KC_RGHT  \
+        KC_LALT, _______, LGUI(0),                            KC_SPC,                             _______, RALT(0), _______, KC_RCTL,      KC_LEFT, KC_DOWN, KC_RGHT  \
     ),
+};
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (biton32(state)) {
+        case _SL:
+            writePinHigh(B7);
+            break;
+        default: //  for any other layers, or the default layer
+            writePinLow(B7);
+            break;
+    }
+    return state;
 };
 
 /**

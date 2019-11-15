@@ -50,14 +50,14 @@ void led_set_kb(uint8_t usb_led) {
         PORTB &= ~(1<<6); // LO
     }
 
-    if (usb_led & (1<<USB_LED_SCROLL_LOCK))
-    {
-        PORTB |= (1<<7); // HI
-    }
-    else
-    {
-        PORTB &= ~(1<<7); // LO
-    }
+//    if (usb_led & (1<<USB_LED_SCROLL_LOCK))
+//    {
+//        PORTB |= (1<<7); // HI
+//    }
+//    else
+//    {
+//        PORTB &= ~(1<<7); // LO
+//    }
 
     led_set_user(usb_led);
 }

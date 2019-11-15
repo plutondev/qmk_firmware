@@ -1,5 +1,1 @@
-# The default keymap for the FC660C
-
-Emulates original keymap.
-
-![](https://i.imgur.com/fg89nez.jpg)
+Darkos layers for FC660C.... easy switch between MAC and WIN layers
