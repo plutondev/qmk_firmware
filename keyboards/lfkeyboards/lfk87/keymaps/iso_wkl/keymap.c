@@ -20,9 +20,9 @@ enum keymap_layout {
 // This list needs to define layer 0xFFFFFFFF, it is the end of the list, and the unknown layer
 const Layer_Info layer_info[] = {
     // Layer     Mask         Red   Green Blue
-    {0x00000000, 0xFFFFFFFF, {0x00, 0x00, 0x00}}, // base layer - off
-    {0x00000002, 0xFFFFFFFF, {0x0F, 0x00, 0x0F}}, // mac layer - purp
-    {0x00000004, 0xFFFFFFFF, {0x00, 0x7F, 0x00}}, // wkl layer - green
+    {0x00000000, 0xFFFFFFFF, {0x00, 0x00, 0x00}}, // base layer - off -> this one has Left Alt set as MOD with WIN key, CAPS is also MOD to LEFT CTRL
+    {0x00000002, 0xFFFFFFFF, {0x0F, 0x00, 0x0F}}, // mac layer - purp -> LEFT CTRL is LEFT ALT, and LEFT_ALT is LEFT_WIN, and CAPS is MOD to LEFT CTRL
+    {0x00000004, 0xFFFFFFFF, {0x00, 0x7F, 0x00}}, // wkl layer - green -> this is vanilla WKL layer except RIGHT_CTRL is FUNC key
     {0x00000008, 0xFFFFFFFF, {0x00, 0x00, 0x7F}}, // function layer - blue
     {0x00000010, 0xFFFFFFFF, {0x7F, 0x00, 0x00}}, // settings layer - red
     {0xFFFFFFFF, 0xFFFFFFFF, {0x0F, 0x0F, 0x0F}}, // unknown layer - REQUIRED - white
@@ -46,12 +46,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'   `-------------'
      */
     [VANILLA] = LAYOUT_tkl_iso(
-                               KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,       KC_PSCR, MO(FUNC),KC_RGUI, \
+                               KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,       KC_PSCR, KC_VOLD, KC_VOLU, \
                                KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,   KC_BSPC,      KC_INS,  KC_HOME, KC_PGUP, \
                                KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                KC_DEL,  KC_END,  KC_PGDN, \
                                MOD_CTRL,KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS,  KC_ENT,                                  \
                                KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,           KC_RSFT,               KC_UP,            \
-                               KC_LCTL, XXXXXXX, MOD_LGUI,                           KC_SPC,                             XXXXXXX, MOD_RGUI,XXXXXXX,  KC_RCTL,      KC_LEFT, KC_DOWN, KC_RGHT  \
+                               KC_LCTL, XXXXXXX, MOD_LGUI,                           KC_SPC,                             XXXXXXX, RALT(0), XXXXXXX, MO(FUNC),      KC_LEFT, KC_DOWN, KC_RGHT  \
                                ),
                                
     /* Keymap VANILLA_MAC: Mac Layer
@@ -70,12 +70,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * `-----------------------------------------------------------'   `-------------'
     */
     [VANILLA_MAC] = LAYOUT_tkl_iso(
-                                  KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,       KC_PSCR, MO(FUNC),KC_PAUS, \
+                                  KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,       KC_PSCR, KC_VOLD, KC_VOLU, \
                                   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,      KC_INS,  KC_HOME, KC_PGUP, \
                                   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,               KC_DEL,  KC_END,  KC_PGDN, \
                                   MOD_CTRL,KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,                                  \
                                   KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT,               KC_UP,            \
-                                  KC_LALT, XXXXXXX, LGUI(0),                            KC_SPC,                             XXXXXXX, RALT(0), XXXXXXX, KC_RCTL,      KC_LEFT, KC_DOWN, KC_RGHT  \
+                                  KC_LALT, XXXXXXX, LGUI(0),                            KC_SPC,                             XXXXXXX, RALT(0), XXXXXXX,MO(FUNC),      KC_LEFT, KC_DOWN, KC_RGHT  \
                                   ),
     
     /* Keymap VANILLA_WKL: Default WKL layout except Prnt ScLk and Paus
@@ -93,13 +93,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |Ctrl|Gui |Alt |      Space            |    |ALT |     |CTRL|   |Lft| Dn |Rig |
      * `-----------------------------------------------------------'   `-------------'
      */
-    [VANILLA_WKL] = LAYOUT_tkl_iso(ß
-                                   KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,       KC_PSCR, MO(FUNC),KC_RGUI, \
+    [VANILLA_WKL] = LAYOUT_tkl_iso(
+                                   KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,       KC_PSCR, KC_VOLD, KC_VOLU, \
                                    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,   KC_BSPC,      KC_INS,  KC_HOME, KC_PGUP, \
                                    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                KC_DEL,  KC_END,  KC_PGDN, \
                                    MOD_CTRL,KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS,  KC_ENT,                                  \
                                    KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,           KC_RSFT,               KC_UP,            \
-                                   KC_LCTL, XXXXXXX, LALT(0),                            KC_SPC,                             XXXXXXX, RALT(0), XXXXXXX,  KC_RCTL,      KC_LEFT, KC_DOWN, KC_RGHT  \
+                                   KC_LCTL, XXXXXXX, LALT(0),                            KC_SPC,                             XXXXXXX, RALT(0), XXXXXXX, MO(FUNC),      KC_LEFT, KC_DOWN, KC_RGHT  \
                                    ),
     
     /* Keymap FUNCTION: Function Layer
@@ -118,12 +118,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-------------------------------------------------------------'   `-------------'
      */
     [FUNC] = LAYOUT_tkl_iso(
-                            _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,           KC_VOLD, _______, KC_VOLU,  \
-                            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,            _______, _______, TG(_MAC), \
-                            XXXXXXX, XXXXXXX, KC_PGUP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    _______, _______, TG(_WKL), \
+                            _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,           KC_PSCR, KC_SLCK, KC_PAUS,  \
+                            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,            TG(_MAC),_______, _______, \
+                            XXXXXXX, XXXXXXX, KC_PGUP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    TG(_WKL),_______, _______, \
                             _______, KC_HOME, KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                      \
-                            _______, XXXXXXX, XXXXXXX, KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX,          TG(_SET),                   _______,          \
-                            _______, _______, _______,                            KC_PGDN,                            _______, _______, _______, _______,           _______, _______, _______  \
+                            _______, XXXXXXX, XXXXXXX, KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX,          TG(_SET),                   KC_MUTE,          \
+                            _______, _______, _______,                            KC_PGDN,                            _______, _______, _______, _______,           KC_VOLD, KC_MUTE, KC_VOLU  \
                             ),
     
     /* Keymap SETTINGS: Settings Layer
