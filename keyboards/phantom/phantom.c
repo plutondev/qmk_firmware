@@ -13,6 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+<<<<<<< HEAD
 #include "phantom.h"
 
 void matrix_init_kb(void) {
@@ -61,3 +62,7 @@ void led_set_kb(uint8_t usb_led) {
 
     led_set_user(usb_led);
 }
+=======
+
+#include "phantom.h"
+>>>>>>> master
